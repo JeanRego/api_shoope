@@ -84,14 +84,14 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'NAME': os.getenv('DB_NAME','apishoope$projeto-api-shoope'),
+        'USER': os.getenv('DB_USER','apishoope'),
+        'PASSWORD': os.getenv('DB_PASSWORD','V3x@92plQz!'),
+        'HOST': os.getenv('DB_HOST','apishoope.mysql.pythonanywhere-services.com'),
+        'PORT': os.getenv('DB_PORT',3306),
         'OPTIONS': {
             'charset': 'utf8mb4',
-        },
+        },        
     }
 }
 
