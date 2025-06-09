@@ -1,3 +1,4 @@
 from django.contrib import admin
+from category.models import CategoryRequest
 
-# Register your models here.
+admin.site.register(CategoryRequest)

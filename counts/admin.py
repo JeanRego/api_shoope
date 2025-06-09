@@ -1,3 +1,4 @@
 from django.contrib import admin
+from counts.models import ShopeeConta
 
-# Register your models here.
+admin.site.register(ShopeeConta)
