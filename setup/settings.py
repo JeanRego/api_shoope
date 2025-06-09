@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME','apishoope$projeto-api-shoope'),
-        'USER': os.getenv('DB_USER','apishoope'),
-        'PASSWORD': os.getenv('DB_PASSWORD','V3x@92plQz!'),
-        'HOST': os.getenv('DB_HOST','apishoope.mysql.pythonanywhere-services.com'),
-        'PORT': os.getenv('DB_PORT',3306),
+        'NAME': 'apishoope$projeto-api-shoope',
+        'USER': 'apishoope',
+        'PASSWORD': 'V3x@92plQz!',
+        'HOST': 'apishoope.mysql.pythonanywhere-services.com',
+        'PORT': 3306,
         'OPTIONS': {
             'charset': 'utf8mb4',
         },        
@@ -118,9 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = os.getenv('LANGUAGE_CODE','pt-BR')
+LANGUAGE_CODE = 'pt-BR'
 
-TIME_ZONE = os.getenv('TIME_ZONE','America/Sao_Paulo')
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
