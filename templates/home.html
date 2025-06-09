@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row g-4">
+    <!-- Lista de Itens -->
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white">📋 Meus Itens</div>
+        <div class="card-body p-0">
+          <table class="table table-hover align-middle mb-0">
+            <thead style="background-color: #e2e8f0;">
+              <tr>
+                <th style="width: 100px;">Id.Shoope</th>
+                <th>Título</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in itens %}
+              <tr>
+                <td>{{ item.id }}</td>
+                <td>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="flex-grow-1">{{ item.title }}</span>
+                    <form method="post" action="{% url 'excluir_titulo' item.id %}" class="ms-2" onsubmit="return confirm('Deseja realmente excluir?');">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="2" class="text-center text-muted">Nenhum item cadastrado.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulário -->
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header text-white" style="background-color: #0f766dd8;">➕ Adicionar Novo Título</div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="title" class="form-label fw-semibold">Título</label>
+              <input type="text" class="form-control" id="title" name="title" required placeholder="Digite o título">
+            </div>
+            <button type="submit" class="btn w-100 text-white" style="background-color: #0f766e;">Adicionar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="text-center mt-5 small">
+  &copy; {{ now|default:2025 }} Sistema de Títulos - Todos os direitos reservados
+</footer>
+{% endblock %}
