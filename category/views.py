@@ -6,6 +6,17 @@ from rest_framework.response import Response
 from .models import CategoryRequest
 from counts.models import ShopeeConta
 from .serializers import CategoryRequestSerializer
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+
+
+@extend_schema(
+    request=CategoryRequestSerializer,
+    responses=CategoryRequestSerializer,
+    parameters=[
+        OpenApiParameter('title', str, description='Título do produto para recomendação'),
+        OpenApiParameter('bare', str, description='Token de usuário', required=True)
+    ]
+)
 
 @api_view(['POST'])
 def recommend_category(request):
