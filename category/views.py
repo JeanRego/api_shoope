@@ -7,7 +7,7 @@ from .models import CategoryRequest
 from counts.models import ShopeeConta
 from .serializers import CategoryRequestSerializer
 from drf_spectacular.utils import extend_schema, OpenApiParameter
-
+import hmac
 
 @extend_schema(
     request=CategoryRequestSerializer,
@@ -32,10 +32,10 @@ def recommend_category(request):
 
     ts = int(time.time())
     path = "/api/v2/product/category_recommend"
-    base_string = f"{conta.partner_id}{path}{ts}"
-    sign = hashlib.sha256((base_string + conta.partner_key).encode()).hexdigest()
+    base_string = f"{conta.partner_id}{path}{ts}{conta.access_token}{conta.shop_id}"
+    sign = hmac.new(conta.partner_key.encode(), base_string.encode(), hashlib.sha256).hexdigest()
 
-    url = f"https://partner.test-stable.shopeemobile.com{path}"
+    url = f"https://partner.shopeemobile.com{path}"
     params = {
         "partner_id": conta.partner_id,
         "sign": sign,
@@ -48,6 +48,7 @@ def recommend_category(request):
     try:
         resp = requests.get(url, params=params)
         data = resp.json()
+        print(resp.text)
     except Exception as e:
         return Response({'error': 'Erro na requisição à Shopee.', 'detalhes': str(e)}, status=500)
 
